@@ -5,6 +5,7 @@
 #include "Components/InputComponent.h"
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
+#include "Interaction/EnemyInterface.h"
 
 AAuraPlayerController::AAuraPlayerController()
 {
@@ -30,6 +31,73 @@ void AAuraPlayerController::BeginPlay()
 	
 }
 
+void AAuraPlayerController::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+
+	CursorTrace();
+}
+
+void AAuraPlayerController::CursorTrace()
+{
+	FHitResult CursorHit;
+	GetHitResultUnderCursor(ECC_Visibility, false, CursorHit);
+	if (!CursorHit.bBlockingHit) return;
+
+	LastActor = ThisActor;
+	ThisActor = CursorHit.GetActor();
+	
+	/*
+	Line trace from cursor. there are several scenarios:
+	A. LastActor is null && ThisActor is null
+		- do nothing
+	B. LastActor is null && ThisActor is valid
+		- call HighlightActor on ThisActor
+	C. LastActor is valid && ThisActor is null
+		- call UnhighlightActor on LastActor
+	D. LastActor is valid && ThisActor is valid, but LastActor != ThisActor
+		- call UnhighlightActor on LastActor
+		- call HighlightActor on ThisActor
+	E. LastActor is valid && ThisActor is valid, and LastActor == ThisActor
+		- do nothing
+	*/
+
+	if (LastActor == nullptr)
+	{
+		if (ThisActor != nullptr)
+		{
+			//Case B
+			ThisActor->HighlightActor();
+		}
+		else
+		{
+			// Case A - Both are null, do nothing
+		}
+	}
+	else //LastActor is valid
+	{
+		if (ThisActor == nullptr)
+		{
+			//Case C
+			LastActor->UnhighlightActor();
+		}
+		else //Both Actors are valid
+		{
+			if (LastActor != ThisActor)
+			{
+				//Case D
+				LastActor->UnhighlightActor();
+				ThisActor->HighlightActor();
+			}
+			else
+			{
+				//Case E - Both are the same, do nothing
+			}
+		}
+	}
+
+}
+
 void AAuraPlayerController::SetupInputComponent()
 {
 	Super::SetupInputComponent();
@@ -38,9 +106,7 @@ void AAuraPlayerController::SetupInputComponent()
 
 	EnhancedInputComponent-> BindAction(MoveAction, ETriggerEvent::Triggered, this, &AAuraPlayerController::Move);
 
-	
 }
-
 void AAuraPlayerController::Move(const FInputActionValue& InputActionValue)
 {
 	const FVector2D InputAxisValue = InputActionValue.Get<FVector2D>();
@@ -60,3 +126,4 @@ void AAuraPlayerController::Move(const FInputActionValue& InputActionValue)
 
 	
 }
+
