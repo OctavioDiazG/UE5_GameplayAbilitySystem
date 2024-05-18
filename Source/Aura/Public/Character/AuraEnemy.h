@@ -14,7 +14,14 @@ class AURA_API AAuraEnemy : public AAuraCharacterBase, public IEnemyInterface
 
 public:
 
+	AAuraEnemy();
+
+	virtual void Tick(float DeltaTime) override;
+
 	virtual void HighlightActor() override;
 	virtual void UnhighlightActor() override;
+
+	UPROPERTY(BlueprintReadOnly)
+	bool bIsHighlighted = false;
 	
 };
