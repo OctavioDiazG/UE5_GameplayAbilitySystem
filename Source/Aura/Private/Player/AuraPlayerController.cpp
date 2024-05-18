@@ -34,7 +34,13 @@ void AAuraPlayerController::BeginPlay()
 void AAuraPlayerController::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+	
+}
 
+void AAuraPlayerController::PlayerTick(float DeltaTime)
+{
+	Super::PlayerTick(DeltaTime);
+	
 	CursorTrace();
 }
 

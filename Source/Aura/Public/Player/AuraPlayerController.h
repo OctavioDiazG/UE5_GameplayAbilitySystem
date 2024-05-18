@@ -22,6 +22,7 @@ public:
 	AAuraPlayerController();
 
 	virtual void Tick(float DeltaTime) override;
+	virtual void PlayerTick(float DeltaTime) override;
 	
 protected:
 	virtual void BeginPlay() override;
