@@ -3,6 +3,8 @@
 
 #include "Character/AuraEnemy.h"
 
+#include "AbilitySystem/AuraAbilitySystemComponent.h"
+#include "AbilitySystem/AuraAttributeSet.h"
 #include "Aura/Aura.h"
 
 
@@ -12,18 +14,17 @@ AAuraEnemy::AAuraEnemy()
 	
 	GetMesh()->SetCustomDepthStencilValue(CUSTOM_DEPTH_RED); // Set the custom depth stencil value of the mesh to red, we don't set it on HighlightActor because it would be redundant to set it every time we highlight the actor
 	Weapon->SetCustomDepthStencilValue(CUSTOM_DEPTH_RED); // Same as above but for the weapon
+
+	AbilitySystemComponent = CreateDefaultSubobject<UAuraAbilitySystemComponent>("AbilitySystemComponent"); // Create the ability system component
+	AbilitySystemComponent->SetIsReplicated(true); // Set the ability system component to be replicated
+
+	AttributeSet = CreateDefaultSubobject<UAuraAttributeSet>("AttributeSet"); // Create the attribute set
+	
+	
+
+
+	
 }
-
-/*
-void AAuraEnemy::Tick(float DeltaTime)
-{
-	Super::Tick(DeltaTime);
-
-	if (bIsHighlighted)
-	{
-		DrawDebugSphere(GetWorld(), GetActorLocation(), 100.0f, 12, FColor::Green, false, -1.0f);
-	}
-}*/
 
 void AAuraEnemy::HighlightActor()
 {
