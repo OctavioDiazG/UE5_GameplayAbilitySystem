@@ -16,11 +16,13 @@ public:
 
 	AAuraEnemy();
 
-	//virtual void Tick(float DeltaTime) override;
-
+	//~ Begin Enemy Interface
 	virtual void HighlightActor() override;
 	virtual void UnhighlightActor() override;
+	//~ End Enemy Interface
 
-	
+protected:
+
+	virtual void BeginPlay() override;
 	
 };

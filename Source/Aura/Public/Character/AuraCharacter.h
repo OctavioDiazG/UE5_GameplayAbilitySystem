@@ -15,14 +15,20 @@ public:
 	// Sets default values for this character's properties
 	AAuraCharacter();
 
-protected:
-	// Called when the game starts or when spawned
-	virtual void BeginPlay() override;
-
-public:
+	virtual void PossessedBy(AController* NewController) override;
+	virtual void OnRep_PlayerState() override;
+	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+
+private:
+	void InitAbilityActorInfo();
+	
+protected:
+	// Called when the game starts or when spawned
+	virtual void BeginPlay() override;
+
 };

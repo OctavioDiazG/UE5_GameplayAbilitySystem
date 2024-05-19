@@ -21,10 +21,14 @@ AAuraEnemy::AAuraEnemy()
 
 	AttributeSet = CreateDefaultSubobject<UAuraAttributeSet>("AttributeSet"); // Create the attribute set
 	
-	
+}
 
-
+void AAuraEnemy::BeginPlay()
+{
+	Super::BeginPlay();
 	
+	check(AbilitySystemComponent); // Check if the ability system component is valid, which it should be because it was created it in the constructor
+	AbilitySystemComponent->InitAbilityActorInfo(this, this); // Initialize the ability actor info
 }
 
 void AAuraEnemy::HighlightActor()
@@ -42,3 +46,5 @@ void AAuraEnemy::UnhighlightActor()
 	Weapon->SetRenderCustomDepth(false); // Set the weapon to not render custom depth
 	
 }
+
+
