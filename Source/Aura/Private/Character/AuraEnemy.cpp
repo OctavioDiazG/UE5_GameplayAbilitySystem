@@ -17,6 +17,7 @@ AAuraEnemy::AAuraEnemy()
 
 	AbilitySystemComponent = CreateDefaultSubobject<UAuraAbilitySystemComponent>("AbilitySystemComponent"); // Create the ability system component
 	AbilitySystemComponent->SetIsReplicated(true); // Set the ability system component to be replicated
+	AbilitySystemComponent->SetReplicationMode(EGameplayEffectReplicationMode::Minimal); // Set the replication mode of the ability system component to minimal because we don't need to replicate all the gameplay effects to the client just GamplayCues and the attributes
 
 	AttributeSet = CreateDefaultSubobject<UAuraAttributeSet>("AttributeSet"); // Create the attribute set
 	
