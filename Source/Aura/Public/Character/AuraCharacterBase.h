@@ -24,13 +24,13 @@ protected:
 	virtual void BeginPlay() override;
 
 	UPROPERTY(EditAnywhere, Category = "Combat") // 
-	TObjectPtr<USkeletalMeshComponent> Weapon;
+	TObjectPtr<USkeletalMeshComponent> Weapon; //skeletal mesh component for the weapon
 
 	UPROPERTY()
-	TObjectPtr<UAbilitySystemComponent> AbilitySystemComponent;
-
+	TObjectPtr<UAbilitySystemComponent> AbilitySystemComponent; // Ability system component
+ 
 	UPROPERTY()
-	TObjectPtr<UAttributeSet> AttributeSet;
+	TObjectPtr<UAttributeSet> AttributeSet; // Attribute set
 	
 
 	

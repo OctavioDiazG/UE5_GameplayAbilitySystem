@@ -9,7 +9,7 @@
 class UAttributeSet;
 class UAbilitySystemComponent;
 /**
- * 
+* widget controller is going to be responsible for getting any data from the system, from the model in this architecture.
  */
 UCLASS()
 class AURA_API UAuraWidgetController : public UObject
