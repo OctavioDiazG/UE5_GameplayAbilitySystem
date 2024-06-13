@@ -5,7 +5,9 @@
 
 #include "AbilitySystemComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "Player/AuraPlayerController.h"
 #include "Player/AuraPlayerState.h"
+#include "UI/HUD/AuraHUD.h"
 
 
 // Sets default values
@@ -78,5 +80,14 @@ void AAuraCharacter::InitAbilityActorInfo()
 	AuraPlayerState->GetAbilitySystemComponent()->InitAbilityActorInfo(AuraPlayerState, this); // Initialize the ability actor info which AuraPlayerState is the owner of the ability system component and this is the actor
 	AbilitySystemComponent = AuraPlayerState->GetAbilitySystemComponent(); // Set the ability system component to the player state ability system component
 	AttributeSet = AuraPlayerState->GetAttributeSet(); // Set the attribute set to the player state attribute set
+
+	if (AAuraPlayerController* AuraPlayerController = Cast<AAuraPlayerController>(GetController())) // place an if to get the PlayerController because in multiplayer games in client side the other player controllers are not valid if you are not the server.
+	{
+		if (AAuraHUD* AuraHUD = Cast<AAuraHUD>(AuraPlayerController->GetHUD())) // Get the HUD from the player controller
+		{
+			AuraHUD->InitOverlay(AuraPlayerController, AuraPlayerState, AbilitySystemComponent, AttributeSet); // Initialize the overlay
+		}
+	}
+	
 }
 

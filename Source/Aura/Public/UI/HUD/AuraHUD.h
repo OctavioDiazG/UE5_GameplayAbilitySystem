@@ -6,7 +6,11 @@
 #include "GameFramework/HUD.h"
 #include "AuraHUD.generated.h"
 
+class UAttributeSet;
+class UAbilitySystemComponent;
+class UOverlayWidgetController;
 class UAuraUserWidget;
+struct FWidgetControllerParams;
 /**
  * 
  */
@@ -17,12 +21,21 @@ class AURA_API AAuraHUD : public AHUD
 
 public:
 	UPROPERTY()
-	TObjectPtr<UAuraUserWidget> OverlayWidget;
+	TObjectPtr<UAuraUserWidget> OverlayWidget; // this is the overlay widget that we are going to create
+
+	UOverlayWidgetController* GetOverlayWidgetController(const FWidgetControllerParams& WCParams); // this is the function that we are going to use to get the overlay widget controller
+
+	void InitOverlay(APlayerController* PC, APlayerState* PS, UAbilitySystemComponent* ASC, UAttributeSet* AS); // this is the function that we are going to use to initialize the overlay
 
 protected:
-	virtual void BeginPlay() override;
 
 private:
 	UPROPERTY(EditAnywhere)
-	TSubclassOf<UAuraUserWidget> OverlayWidgetClass;
+	TSubclassOf<UAuraUserWidget> OverlayWidgetClass; // this is the class that we are going to use to create the overlay widget
+
+	UPROPERTY()
+	TObjectPtr<UOverlayWidgetController> OverlayWidgetController; // this is the overlay widget controller that we are going to create
+	 
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<UOverlayWidgetController> OverlayWidgetControllerClass; // this is the class that we are going to use to create the overlay widget controller
 };

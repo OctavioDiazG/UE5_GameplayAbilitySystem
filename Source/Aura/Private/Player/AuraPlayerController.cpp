@@ -18,8 +18,10 @@ void AAuraPlayerController::BeginPlay()
 
 	check(AuraContext);
 	UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(GetLocalPlayer());
-	check(Subsystem);
-	Subsystem->AddMappingContext(AuraContext, 0);
+	if (Subsystem)
+	{
+		Subsystem->AddMappingContext(AuraContext, 0);
+	}
 
 	bShowMouseCursor = true;
 	DefaultMouseCursor = EMouseCursor::Default;
@@ -53,7 +55,7 @@ void AAuraPlayerController::CursorTrace()
 	LastActor = ThisActor;
 	ThisActor = CursorHit.GetActor();
 	
-	/*
+	/* this is for the enemies to glow when the cursor is on them
 	Line trace from cursor. there are several scenarios:
 	A. LastActor is null && ThisActor is null
 		- do nothing
