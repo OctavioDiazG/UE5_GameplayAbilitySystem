@@ -30,6 +30,8 @@ void AAuraHUD::InitOverlay(APlayerController* PC, APlayerState* PS, UAbilitySyst
 	UOverlayWidgetController* WidgetController = GetOverlayWidgetController(WidgetControllerParams); // we are going to get the overlay widget controller
 
 	OverlayWidget->SetWidgetController(WidgetController); // we are going to set the widget controller
+
+	WidgetController->BrodCastInitialValues(); // we are going to broadcast the initial values to the UI (OverlayWidget) REMEMBER THIS SHOULD BE CALLED AFTER THE WIDGET CONTROLLER IS SET
 	
 	Widget-> AddToViewport(); // we are going to add the widget to the viewport
 	

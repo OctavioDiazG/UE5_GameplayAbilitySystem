@@ -45,6 +45,8 @@ class AURA_API UAuraWidgetController : public UObject
 public:
 	UFUNCTION(BlueprintCallable)
 	void SetWidgetControllerParams(const FWidgetControllerParams& WCParams); // this function will be called by the game mode to set the widget controller params
+
+	virtual void BrodCastInitialValues(); // this function will be called by the game mode to broadcast the initial values to the widget
 	
 protected:
 
