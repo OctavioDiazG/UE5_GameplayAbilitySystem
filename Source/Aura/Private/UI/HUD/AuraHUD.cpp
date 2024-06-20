@@ -11,6 +11,7 @@ UOverlayWidgetController* AAuraHUD::GetOverlayWidgetController(const FWidgetCont
 	{
 		OverlayWidgetController = NewObject<UOverlayWidgetController>(this, OverlayWidgetControllerClass);
 		OverlayWidgetController->SetWidgetControllerParams(WCParams);
+		OverlayWidgetController->BindCallBacksToDependencies();
 
 		//return OverlayWidgetController;
 	} // if the overlay widget controller is not null, we are going to set the widget controller params and return the overlay widget controller

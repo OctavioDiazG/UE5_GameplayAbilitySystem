@@ -47,6 +47,8 @@ public:
 	void SetWidgetControllerParams(const FWidgetControllerParams& WCParams); // this function will be called by the game mode to set the widget controller params
 
 	virtual void BrodCastInitialValues(); // this function will be called by the game mode to broadcast the initial values to the widget
+
+	virtual void BindCallBacksToDependencies(); // this function will be called by the game mode to bind the callbacks to the dependencies
 	
 protected:
 
