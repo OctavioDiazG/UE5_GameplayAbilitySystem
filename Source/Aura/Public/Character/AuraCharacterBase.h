@@ -23,7 +23,7 @@ public:
 protected:
 	virtual void BeginPlay() override;
 
-	UPROPERTY(EditAnywhere, Category = "Combat") // 
+	UPROPERTY(EditAnywhere, Category = "Combat") // Edit anywhere in the combat category
 	TObjectPtr<USkeletalMeshComponent> Weapon; //skeletal mesh component for the weapon
 
 	UPROPERTY()
